@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { makeData, Tips } from './utils';
+import { makeData } from './utils';
 import matchSorter from 'match-sorter';
 import './parts.css';
 
@@ -12,15 +12,6 @@ const columns = [
   {
     Header: 'Parts',
     columns: [
-      // {
-      //   Header: 'First Name',
-      //   accessor: 'firstName',
-      // },
-      // {
-      //   Header: 'Last Name',
-      //   id: 'lastName',
-      //   accessor: d => d.lastName,
-      // },
       {
         Header: 'ID',
         accessor: 'part_id',
