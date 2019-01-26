@@ -127,7 +127,7 @@ export default class Parts extends React.Component {
                   data={data}
                   columns={columns}
                   filterable
-                  defaultPageSize={3}
+                  defaultPageSize={5}
                   showPagination={false}
                   SubComponent={row => {
                     return (
