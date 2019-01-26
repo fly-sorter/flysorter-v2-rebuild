@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React from 'react';
 import { Route, NavLink, BrowserRouter as Router } from 'react-router-dom';
 import Parts from '../parts/parts.js';
 import EditPart from '../edit-part/edit-part.js';
