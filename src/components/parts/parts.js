@@ -1,8 +1,8 @@
 import React from 'react';
-// import { render } from 'react-dom';
-import matchSorter from 'match-sorter';
+import { render } from 'react-dom';
 import { makeData, Tips } from './utils';
-import _ from 'lodash';
+import matchSorter from 'match-sorter';
+import './parts.css';
 
 // Import React Table
 import ReactTable from 'react-table';
@@ -10,12 +10,17 @@ import 'react-table/react-table.css';
 
 const columns = [
   {
-    Header: 'Name',
+    Header: 'Parts',
     columns: [
-      {
-        Header: 'First Name',
-        accessor: 'firstName',
-      },
+      // {
+      //   Header: 'First Name',
+      //   accessor: 'firstName',
+      // },
+      // {
+      //   Header: 'Last Name',
+      //   id: 'lastName',
+      //   accessor: d => d.lastName,
+      // },
       {
         Header: 'ID',
         accessor: 'part_id',
@@ -45,7 +50,7 @@ const columns = [
         filterAll: true,
       },
       {
-        Header: 'Manufacture Part Number',
+        Header: 'Mfr. Part #',
         accessor: 'part_mfgnum',
         filterMethod: (filter, rows) =>
           matchSorter(rows, filter.value, { keys: ['part_mfgnum'] }),
@@ -93,36 +98,6 @@ const columns = [
           matchSorter(rows, filter.value, { keys: ['part_notes'] }),
         filterAll: true,
       },
-      {
-        Header: 'Last Name',
-        id: 'lastName',
-        accessor: d => d.lastName,
-      },
-    ],
-  },
-  {
-    Header: 'Info',
-    columns: [
-      {
-        Header: 'Age',
-        accessor: 'age',
-        aggregate: vals => _.round(_.mean(vals)),
-        Aggregated: row => {
-          return (
-            <span>
-              {row.value} (avg)
-            </span>
-          );
-        },
-        filterMethod: (filter, row) =>
-          filter.value === `${row[filter.id]} (avg)`,
-      },
-      {
-        Header: 'Visits',
-        accessor: 'visits',
-        aggregate: vals => _.sum(vals),
-        filterable: false,
-      },
     ],
   },
 ];
@@ -139,12 +114,14 @@ export default class Parts extends React.Component {
     return (
       <div>
         <ReactTable
-          className='parts-table'
+          filterable
           data={data}
           columns={columns}
-          defaultPageSize={10}
-          pivotBy={['firstName', 'lastName']}
-          filterable
+          defaultPageSize={25}
+          style={{
+            height: '670px',
+          }}
+          className="-striped -highlight parts-table"
           SubComponent={row => {
             return (
               <div style={{ padding: '20px' }}>
@@ -155,13 +132,17 @@ export default class Parts extends React.Component {
                 <br />
                 <br />
                 <ReactTable
+                  className='parts-table'
                   data={data}
                   columns={columns}
+                  filterable
                   defaultPageSize={3}
                   showPagination={false}
                   SubComponent={row => {
                     return (
-                      <div style={{ padding: '20px' }}>Sub Component!</div>
+                      <div style={{ padding: '20px' }}>
+                        Another Sub Component!
+                      </div>
                     );
                   }}
                 />
@@ -169,9 +150,13 @@ export default class Parts extends React.Component {
             );
           }}
         />
-        <br />
-        <Tips />
       </div>
     );
   }
 }
+
+
+
+
+
+

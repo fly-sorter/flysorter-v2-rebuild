@@ -13,12 +13,12 @@ const range = len => {
 const newPerson = () => {
   const statusChance = Math.random();
   return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
+    part_desc: namor.generate({ words: 1, numbers: 0 }),
+    part_sub: namor.generate({ words: 1, numbers: 0 }),
+    part_id: Math.floor(Math.random() * 10000),
+    part_price: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
-    status:
+    part_src:
       statusChance > 0.66
         ? 'relationship'
         : statusChance > 0.33 ? 'complicated' : 'single',
@@ -33,8 +33,3 @@ export function makeData(len = 5553) {
     };
   });
 }
-
-export const Tips = () =>
-  <div style={{ textAlign: 'center' }}>
-    <em>Tip: Hold shift when sorting to multi-sort!</em>
-  </div>;
