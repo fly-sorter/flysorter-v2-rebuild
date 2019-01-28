@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import logo from './assets/logo.png';
+import Header from './components/header/header.js';
 
 class App extends Component {
   render() {
-    return (
-      <div >
-
-        <img src={logo} className="App-logo" alt="logo" />
-
-      </div >
-    );
+    return <Header />;
   }
 }
 

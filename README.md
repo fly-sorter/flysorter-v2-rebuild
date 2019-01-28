@@ -1,70 +1,93 @@
 # Fly Sorter Rebuild
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![logo](./src/assets/logo.png)
+# Welcome
+The following documentation is specifically for the ***FRONT END*** repository. If you are looking for the ***BACK END*** respository click [HERE](https://github.com/fly-sorter/flySorter-front-end-v2).
 
-## Available Scripts
+# Description
+FlySorter is an inventory management application for the Seattle-based company: [FlySorter](https://flysorter.com/). FlySorter builds machines to sort fruit flies so they can be used for scientific research. This application keeps track of those machine assemblies, sub-assemblies, and the parts that belong to those sub assemblies. These components are displayed on the page and allows the user to click on a sub-assembly to reveal the parts that makeup that sub-assembly. The table also allows the user to filter parts and search for a part in order to make finding particular parts faster and easier for the user.
 
-In the project directory, you can run:
+# Why It Matters
+_"In 1908, looking to test Mendel’s theories on heredity, Thomas Hunt Morgan began studying Drosophila melanogaster (also known as the fruit fly or vinegar fly) in his “Fly Room” at Columbia University. Dr. Morgan and his students studied flies, looking for mutations, and found that some individuals had white eyes instead of the usual red eyes. Experimentation on the prevalence and propagation of the mutation led to the first proof that the chromosomal theory of inheritance was correct, and established drosophila as the first model research organism. The use of drosophila has been extremely fruitful in the past 100 years. Since Dr. Morgan’s experiments, drosophila research has been featured in over 100,000 scientific papers. This includes being involved in Nobel prize-winning research five times (in 1933, 1946, 1995, 2004, and 2011)."_ — [The Research Value of Drosophila Melangoaster](http://powersscientific.com/the-research-value-of-drosophila-melanogaster/)
 
-### `npm start`
+# Languages, Technologies, Frameworks, & Libraries Used
+The following technologies were used to develop the frontend:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. React
+2. Redux
+3. React-Table
+4. WebPack
+5. Babel
+6. Eslint
+7. SCSS
+8. Match-Sorter
+9. React-Cookies
+10. [Coolers.co](https://coolors.co/ff514d-d6d6d6-000000-4c4c4c-7a7a7a) (color theme)
+11. [AWS S3](https://aws.amazon.com/s3/)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Running the Application
+The frontend was developed to run in conjunction with the original backend for the FlySorter application that was developed using Node, Express, and MongoDB. The frontend has been refactored to use React/Redux best practices, and incorporates a subtle update to the CSS styling to give the product a more refined and modern look/feel. 
 
-### `npm test`
+The frontend code that lives in this repo has been deployed to [AWS S3](https://aws.amazon.com/s3/), and communicates with the AWS hosted [BACK-END](https://github.com/fly-sorter/flySorter-front-end-v2). To view the live deployment of this application please visit this [link](). 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Account Setup
+### Once on the landing page...
 
-### `npm run build`
+### If you are a new user...
+  - Follow the instructions to set yourself up a new user
+  - Click "signup" once all fields are required fields are filled in to create an account
+  - Once your account is created, you will be taken to the main dashboard
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Account Creation](assets/account-creation.png)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### If you already have a username...
+  - Login with your username and password
+  - Once you login you will be taken to the main dashboard
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Dashboard](assets/dashboard.png)
 
-### `npm run eject`
+# Site Navigation
+### Dashboard
+- On the main dashboard you will see a table with with a list of parts and sub-assemblies
+- Clicking the black triangles will expand/collapse the table to reveal nested information
+- You can use the filter boxes to search and filter for a specific part or sub-assembly
+- You can also create new parts and sub-assemblies by clicking the associated tabs from this view
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Create a Sub-Assembly
+- Clicking 'Create a Sub Assembly' will take you to the sub assembly creation form page
+- When creating a sub assembly, take note of the very bottom field. This is the sub-assembly ID, and you will use this number to add parts to this particular sub-assembly on the part creation page.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Sub-Assembly](assets/sub-assembly.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Create a Part
+- Clicking 'Create a Part' will take you to the part creation form page
+- This page will allow you to create parts and assign them to sub assemblies by assigning them to a specific sub-assembly ID (NOTE: If you don't remember the specific sub-assembly ID, the app will display the latest ID at the top of the page).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![create-part](assets/part-creation.png)
 
-## Learn More
+### Accounts
+- Clicking 'Accounts' will take you to a page that displays the current list of authorized users for the site.
+- Users with 'Super User' level access are able to add/remove users from this view
+- Users with 'Basic' level access are given read-only access, and do not have the ability to add/remove or edit
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Project Teams
+### Original Team 
+* [Benjamin West](https://github.com/bgwest) | | 
+[Daniel Frey](https://github.com/fncreative) | | 
+[Tom North](https://github.com/tnorth93) | | 
+[Wyatt Pefley](https://github.com/peffles)
+____
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### AWS Serverless Migration Team
+* [Ben Harris](https://github.com/harrishills) | |
+[David Chambers, Jr.](https://github.com/dlchambersjr) | |
+[Emery Parks](https://github.com/emeryP) | |
+[Timothy Li](https://github.com/timinis) | |
+[Trevor Stam](hhttps://github.com/trevorstam)
 
-### Code Splitting
+### Rebuild Team
+* [David Chambers, Jr.](https://github.com/dlchambersjr)
+|| [Emery Parks](https://github.com/emeryP)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

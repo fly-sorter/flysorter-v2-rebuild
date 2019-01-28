@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  color: #333;
+  font-size: 18pt;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+body {
+  margin: 1em;
+}
+
+.primary-header {
+  display: inline;
+}
+.primary-header nav {
+  border-bottom: 2px solid #555;
+  flex: 1;
+}
+.primary-header nav a {
+  color: #555;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+}
+.primary-header nav a:hover {
+  background-color: #eee;
+}
+.primary-header nav a.active {
+  background-color: #555;
+  color: #fff;
+}
