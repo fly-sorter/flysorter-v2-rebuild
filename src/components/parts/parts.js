@@ -29,7 +29,7 @@ const columns = [
         accessor: 'part_src',
       },
       {
-        Header: 'Mfr. Part #',
+        Header: 'Mfg/Dist Part #',
         accessor: 'part_mfgnum',
       },
       {
@@ -60,26 +60,28 @@ const columns = [
   },
 ];
 
-export default class Parts extends React.Component {
+
+class Parts extends React.Component {
   constructor() {
     super();
     this.state = {
       data: makeData(),
+      filtered: [],
     };
   }
   render() {
     const { data } = this.state;
     return (
       <div>
+        <button onClick={() => this.setState({ filtered: [] })}>Reset</button>
         <ReactTable
+          onFilteredChange={filtered => {this.setState({ filtered });}}
           className="-striped -highlight parts-table"
           columns={columns}
           data={data}
           defaultPageSize={25}
-          filterMethod={(filter, rows) => {
-            return matchSorter(rows, filter.value);
-          }}
-          filterable
+          filtered={this.state.filtered}
+          filterable={true}
           style={{
             height: '670px',
           }}
@@ -96,7 +98,7 @@ export default class Parts extends React.Component {
                   className='parts-table'
                   columns={columns}
                   data={data}
-                  filterable
+                  filterable={false}
                   defaultPageSize={5}
                   showPagination={false}
                   SubComponent={row => {
@@ -116,6 +118,7 @@ export default class Parts extends React.Component {
   }
 }
 
+export default Parts;
 
 
 
