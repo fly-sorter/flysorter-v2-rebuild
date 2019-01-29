@@ -16,14 +16,11 @@ const columns = [
       {
         Header: 'ID',
         accessor: 'part_id',
+        width: 90,
       },
       {
         Header: 'Description',
         accessor: 'part_desc',
-      },
-      {
-        Header: 'Subpart?',
-        accessor: 'part_sub',
       },
       {
         Header: 'Source',
@@ -36,21 +33,25 @@ const columns = [
       {
         Header: 'Price',
         accessor: 'part_price',
+        width: 90,
       },
       {
         Header: 'Category ID',
         accessor: 'part_category',
+        width: 100,
       },
       {
         Header: 'Location ID',
         accessor: 'part_location',
+        width: 100,
       },
       {
-        Header: 'Part Count',
+        Header: 'Qty In Stock',
         accessor: 'part_count',
+        width: 100,
       },
       {
-        Header: 'Long lead?',
+        Header: 'Lead time (W)',
         accessor: 'part_longlead',
       },
       {
@@ -61,18 +62,22 @@ const columns = [
   },
   {
     Header: 'Actions',
+    
     columns: [
       {
         Header: 'Edit',
         accessor: 'edit',
+        width: 50,
       },
       {
         Header: 'Save',
         accessor: 'save',
+        width: 50,
       },
       {
         Header: 'Delete',
         accessor: 'delete',
+        width: 70,
       },
     ],
   },
@@ -86,7 +91,27 @@ class Parts extends React.Component {
       data: makeData(),
       filtered: [],
     };
+    // this.renderEditable = this.renderEditable.bind(this);
   }
+  // editable table feature
+  // renderEditable(cellInfo) {
+  //   return (
+  //     <div
+  //       style={{ backgroundColor: '#fafafa' }}
+  //       contentEditable
+  //       suppressContentEditableWarning
+  //       onBlur={e => {
+  //         const data = [...this.state.data];
+  //         data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+  //         this.setState({ data });
+  //       }}
+  //       dangerouslySetInnerHTML={{
+  //         __html: this.state.data[cellInfo.index][cellInfo.column.id],
+  //       }}
+  //     />
+  //   );
+  // }
+
   render() {
     const { data } = this.state;
     return (

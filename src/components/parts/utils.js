@@ -1,4 +1,7 @@
 import React from 'react';
+import Delete from '../delete/delete.js';
+import EditPart from '../edit-part/edit-part.js';
+import Save from '../save/save.js';
 import namor from 'namor';
 import './parts.css';
 
@@ -14,13 +17,13 @@ const newPerson = () => {
   const statusChance = Math.random();
   return {
     part_desc: namor.generate({ words: 1, numbers: 0 }),
-    part_sub: namor.generate({ words: 1, numbers: 0 }),
-    part_id: Math.floor(Math.random() * 10000),
+    // part_src: namor.generate({ words: 1, numbers: 0 }),
+    part_id: Math.floor(Math.random() * 1000000),
     part_price: Math.floor(Math.random() * 100),
     part_count: Math.floor(Math.random() * 100),
-    edit: <button onClick={() => this.setState({ filtered: [] })}>Edit</button>,
-    delete: <button onClick={() => this.setState({ filtered: [] })}>Delete</button>,
-    save: <button onClick={() => this.setState({ filtered: [] })}>Save</button>,
+    edit: <EditPart />,
+    delete: <Delete />,
+    save: <Save />,
     progress: Math.floor(Math.random() * 100),
     part_src:
       statusChance > 0.66
