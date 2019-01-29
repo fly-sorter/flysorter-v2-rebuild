@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CreateSub extends React.Component {
+class CreateSub extends React.Component {
   render() {
     return (
       <div>
@@ -9,3 +9,5 @@ export default class CreateSub extends React.Component {
     );
   }
 }
+
+export default CreateSub;

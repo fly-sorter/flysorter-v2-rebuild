@@ -11,108 +11,108 @@ import 'react-table/react-table.css';
 const columns = [
   {
     Header: 'Parts',
+
     columns: [
       {
         Header: 'ID',
         accessor: 'part_id',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_id'] }),
-        filterAll: true,
+        width: 90,
       },
       {
         Header: 'Description',
         accessor: 'part_desc',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_desc'] }),
-        filterAll: true,
-      },
-      {
-        Header: 'Subpart?',
-        accessor: 'part_sub',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_sub'] }),
-        filterAll: true,
       },
       {
         Header: 'Source',
         accessor: 'part_src',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_src'] }),
-        filterAll: true,
       },
       {
-        Header: 'Mfr. Part #',
+        Header: 'Mfg/Dist Part #',
         accessor: 'part_mfgnum',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_mfgnum'] }),
-        filterAll: true,
       },
       {
         Header: 'Price',
         accessor: 'part_price',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_price'] }),
-        filterAll: true,
+        width: 90,
       },
       {
         Header: 'Category ID',
         accessor: 'part_category',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_category'] }),
-        filterAll: true,
+        width: 100,
       },
       {
         Header: 'Location ID',
         accessor: 'part_location',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_location'] }),
-        filterAll: true,
+        width: 100,
       },
       {
-        Header: 'Part Count',
+        Header: 'Qty In Stock',
         accessor: 'part_count',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_count'] }),
-        filterAll: true,
+        width: 100,
       },
       {
-        Header: 'Long lead?',
+        Header: 'Lead time (W)',
         accessor: 'part_longlead',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_longlead'] }),
-        filterAll: true,
       },
       {
         Header: 'Notes',
         accessor: 'part_notes',
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ['part_notes'] }),
-        filterAll: true,
+      },
+    ],
+  },
+  {
+    Header: 'Actions',
+
+    columns: [
+      {
+        Header: 'Edit',
+        accessor: 'edit',
+        width: 50,
+      },
+      {
+        Header: 'Save',
+        accessor: 'save',
+        width: 50,
+      },
+      {
+        Header: 'Delete',
+        accessor: 'delete',
+        width: 70,
       },
     ],
   },
 ];
 
-export default class Parts extends React.Component {
+
+class Parts extends React.Component {
   constructor() {
     super();
     this.state = {
       data: makeData(),
+      filtered: [],
     };
   }
+
   render() {
     const { data } = this.state;
     return (
       <div>
+        <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
-          filterable
-          data={data}
+          onFilteredChange={filtered => { this.setState({ filtered }); }}
+          className="-striped -highlight parts-table"
           columns={columns}
+          data={data}
           defaultPageSize={25}
+          filtered={this.state.filtered}
+          filterable={true}
+          sorted={[{
+            id: 'part_id',
+            asc: true,
+          }]}
           style={{
             height: '670px',
           }}
-          className="-striped -highlight parts-table"
           SubComponent={row => {
             return (
               <div style={{ padding: '20px' }}>
@@ -124,9 +124,9 @@ export default class Parts extends React.Component {
                 <br />
                 <ReactTable
                   className='parts-table'
-                  data={data}
                   columns={columns}
-                  filterable
+                  data={data}
+                  filterable={false}
                   defaultPageSize={5}
                   showPagination={false}
                   SubComponent={row => {
@@ -146,6 +146,7 @@ export default class Parts extends React.Component {
   }
 }
 
+export default Parts;
 
 
 
