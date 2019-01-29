@@ -62,7 +62,7 @@ const columns = [
   },
   {
     Header: 'Actions',
-    
+
     columns: [
       {
         Header: 'Edit',
@@ -91,26 +91,7 @@ class Parts extends React.Component {
       data: makeData(),
       filtered: [],
     };
-    // this.renderEditable = this.renderEditable.bind(this);
   }
-  // editable table feature
-  // renderEditable(cellInfo) {
-  //   return (
-  //     <div
-  //       style={{ backgroundColor: '#fafafa' }}
-  //       contentEditable
-  //       suppressContentEditableWarning
-  //       onBlur={e => {
-  //         const data = [...this.state.data];
-  //         data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-  //         this.setState({ data });
-  //       }}
-  //       dangerouslySetInnerHTML={{
-  //         __html: this.state.data[cellInfo.index][cellInfo.column.id],
-  //       }}
-  //     />
-  //   );
-  // }
 
   render() {
     const { data } = this.state;
@@ -125,6 +106,10 @@ class Parts extends React.Component {
           defaultPageSize={25}
           filtered={this.state.filtered}
           filterable={true}
+          sorted={[{
+            id: 'part_id',
+            asc: true,
+          }]}
           style={{
             height: '670px',
           }}
