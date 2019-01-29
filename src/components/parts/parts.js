@@ -11,6 +11,7 @@ import 'react-table/react-table.css';
 const columns = [
   {
     Header: 'Parts',
+
     columns: [
       {
         Header: 'ID',
@@ -58,6 +59,23 @@ const columns = [
       },
     ],
   },
+  {
+    Header: 'Actions',
+    columns: [
+      {
+        Header: 'Edit',
+        accessor: 'edit',
+      },
+      {
+        Header: 'Save',
+        accessor: 'save',
+      },
+      {
+        Header: 'Delete',
+        accessor: 'delete',
+      },
+    ],
+  },
 ];
 
 
@@ -73,9 +91,9 @@ class Parts extends React.Component {
     const { data } = this.state;
     return (
       <div>
-        <button onClick={() => this.setState({ filtered: [] })}>Reset</button>
+        <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
-          onFilteredChange={filtered => {this.setState({ filtered });}}
+          onFilteredChange={filtered => { this.setState({ filtered }); }}
           className="-striped -highlight parts-table"
           columns={columns}
           data={data}
