@@ -14,100 +14,43 @@ import './parts.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
-const columns = [
-  {
-    Header: 'Parts',
-
-    columns: [
-      {
-        Header: 'ID',
-        accessor: 'part_id',
-        width: 90,
-      },
-      {
-        Header: 'Description',
-        accessor: 'part_desc',
-      },
-      {
-        Header: 'Assembly',
-        accessor: 'part_sub',
-        width: 100,
-      },
-      {
-        Header: 'Source',
-        accessor: 'part_src',
-      },
-      {
-        Header: 'Mfg/Dist Part #',
-        accessor: 'part_mfgnum',
-      },
-      {
-        Header: 'Price',
-        accessor: 'part_price',
-        width: 90,
-      },
-      {
-        Header: 'Category ID',
-        accessor: 'part_category',
-        width: 100,
-      },
-      {
-        Header: 'Location ID',
-        accessor: 'part_location',
-        width: 100,
-      },
-      {
-        Header: 'Qty In Stock',
-        accessor: 'part_count',
-        width: 100,
-      },
-      {
-        Header: 'Lead time (W)',
-        accessor: 'part_longlead',
-      },
-      {
-        Header: 'Notes',
-        accessor: 'part_notes',
-      },
-    ],
-  },
-  {
-    Header: 'Actions',
-
-    columns: [
-      {
-        Header: 'Edit',
-        accessor: 'edit',
-        width: 50,
-      },
-      {
-        Header: 'Save',
-        accessor: 'save',
-        width: 50,
-      },
-      {
-        Header: 'Delete',
-        accessor: 'delete',
-        width: 70,
-      },
-    ],
-  },
-];
-
-
 
 
 class Parts extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       filtered: [],
-    };
-  }
+    }
+    // this.editOnClick = this.editOnClick.bind(this);
+  };
+
 
   componentDidMount = () => {
     this.props.getParts();
   }
+
+  // function renderEditable(cellInfo) {
+  //   console.log('test')
+  //   return (
+  //     <div
+  //       style={{ backgroundColor: "#fafafa" }}
+  //       contentEditable
+  //       suppressContentEditableWarning
+  //       onBlur={e => {
+  //         const data = this.props.parts.parts;
+  //         data[cellInfo.index][cellInfo.column.part_desc] = e.target.innerHTML;
+  //         this.setState({ data });
+  //       }}
+  //     />
+  //   );
+  // }
+
+  // editOnClick = () => {
+  //   this.setState({
+  //     editable: true,
+  //   })
+  // }
 
   render() {
     const data = this.props.parts.parts.map(element => {
@@ -116,13 +59,93 @@ class Parts extends React.Component {
       element.delete = <Delete />
       return element;
     });
+    console.log(this.props.editable)
     // const columns = this.props.parts.parts;
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
-          columns={columns}
+          columns={[
+            {
+              Header: 'Parts',
+
+              columns: [
+                {
+                  Header: 'ID',
+                  accessor: 'part_id',
+                  width: 90,
+                },
+                {
+                  Header: 'Description',
+                  accessor: 'part_desc',
+                  Cell: this.state.editable,
+                },
+                {
+                  Header: 'Assembly',
+                  accessor: 'part_sub',
+                  width: 100,
+                },
+                {
+                  Header: 'Source',
+                  accessor: 'part_src',
+                },
+                {
+                  Header: 'Mfg/Dist Part #',
+                  accessor: 'part_mfgnum',
+                },
+                {
+                  Header: 'Price',
+                  accessor: 'part_price',
+                  width: 90,
+                },
+                {
+                  Header: 'Category ID',
+                  accessor: 'part_category',
+                  width: 100,
+                },
+                {
+                  Header: 'Location ID',
+                  accessor: 'part_location',
+                  width: 100,
+                },
+                {
+                  Header: 'Qty In Stock',
+                  accessor: 'part_count',
+                  width: 100,
+                },
+                {
+                  Header: 'Lead time (W)',
+                  accessor: 'part_longlead',
+                },
+                {
+                  Header: 'Notes',
+                  accessor: 'part_notes',
+                },
+              ],
+            },
+            {
+              Header: 'Actions',
+
+              columns: [
+                {
+                  Header: 'Edit',
+                  accessor: 'edit',
+                  width: 50,
+                },
+                {
+                  Header: 'Save',
+                  accessor: 'save',
+                  width: 50,
+                },
+                {
+                  Header: 'Delete',
+                  accessor: 'delete',
+                  width: 70,
+                },
+              ],
+            },
+          ]}
           data={data}
           defaultPageSize={25}
           filtered={this.state.filtered}
@@ -146,7 +169,85 @@ class Parts extends React.Component {
                 <br />
                 <ReactTable
                   className='parts-table'
-                  columns={columns}
+                  columns={[
+                    {
+                      Header: 'Parts',
+
+                      columns: [
+                        {
+                          Header: 'ID',
+                          accessor: 'part_id',
+                          width: 90,
+                        },
+                        {
+                          Header: 'Description',
+                          accessor: 'part_desc',
+                        },
+                        {
+                          Header: 'Assembly',
+                          accessor: 'part_sub',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Source',
+                          accessor: 'part_src',
+                        },
+                        {
+                          Header: 'Mfg/Dist Part #',
+                          accessor: 'part_mfgnum',
+                        },
+                        {
+                          Header: 'Price',
+                          accessor: 'part_price',
+                          width: 90,
+                        },
+                        {
+                          Header: 'Category ID',
+                          accessor: 'part_category',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Location ID',
+                          accessor: 'part_location',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Qty In Stock',
+                          accessor: 'part_count',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Lead time (W)',
+                          accessor: 'part_longlead',
+                        },
+                        {
+                          Header: 'Notes',
+                          accessor: 'part_notes',
+                        },
+                      ],
+                    },
+                    {
+                      Header: 'Actions',
+
+                      columns: [
+                        {
+                          Header: 'Edit',
+                          accessor: 'edit',
+                          width: 50,
+                        },
+                        {
+                          Header: 'Save',
+                          accessor: 'save',
+                          width: 50,
+                        },
+                        {
+                          Header: 'Delete',
+                          accessor: 'delete',
+                          width: 70,
+                        },
+                      ],
+                    },
+                  ]}
                   data={data}
                   filterable={false}
                   defaultPageSize={5}
@@ -168,8 +269,10 @@ class Parts extends React.Component {
   }
 }
 
+
 const mapStateToProps = state => ({
   parts: state.parts,
+  edit: state.editable,
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
