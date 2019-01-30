@@ -5,8 +5,6 @@ import Save from '../save/save.js';
 import namor from 'namor';
 import './parts.css';
 
-
-
 const range = len => {
   const arr = [];
   for (let i = 0; i < len; i++) {

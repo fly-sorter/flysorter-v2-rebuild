@@ -1,9 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { makeData } from './utils';
+// import { makeData } from './utils';
 import matchSorter from 'match-sorter';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/parts-actions.js';
+import EditPart from '../edit-part/edit-part.js';
+import Save from '../save/save.js';
+import Delete from '../delete/delete.js'
 
 import './parts.css';
 
@@ -24,6 +27,11 @@ const columns = [
       {
         Header: 'Description',
         accessor: 'part_desc',
+      },
+      {
+        Header: 'Assembly',
+        accessor: 'part_sub',
+        width: 100,
       },
       {
         Header: 'Source',
@@ -102,18 +110,24 @@ class Parts extends React.Component {
   }
 
   render() {
-    const data = this.props.parts.parts;
+    const data = this.props.parts.parts.map(element => {
+      element.edit = <EditPart />
+      element.save = <Save />
+      element.delete = <Delete />
+      return element;
+    });
+    // const columns = this.props.parts.parts;
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
-          onFilteredChange={filtered => { this.setState({ filtered }); }}
           className="-striped -highlight parts-table"
           columns={columns}
           data={data}
           defaultPageSize={25}
           filtered={this.state.filtered}
           filterable={true}
+          onFilteredChange={filtered => { this.setState({ filtered }); }}
           sorted={[{
             id: 'part_id',
             asc: true,
