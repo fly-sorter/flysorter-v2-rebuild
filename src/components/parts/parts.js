@@ -2,6 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { makeData } from './utils';
 import matchSorter from 'match-sorter';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/parts-actions.js';
+
 import './parts.css';
 
 // Import React Table
@@ -84,17 +87,22 @@ const columns = [
 ];
 
 
+
+
 class Parts extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: makeData(),
       filtered: [],
     };
   }
 
+  componentDidMount = () => {
+    this.props.getParts();
+  }
+
   render() {
-    const { data } = this.state;
+    const data = this.props.parts.parts;
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
@@ -146,7 +154,18 @@ class Parts extends React.Component {
   }
 }
 
-export default Parts;
+const mapStateToProps = state => ({
+  parts: state.parts,
+});
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  getParts: () => dispatch(actions.getParts()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Parts);
 
 
 
