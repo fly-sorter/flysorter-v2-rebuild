@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
       return { ...state, ...{ edit: payload } };
 
     case 'SAVEPARTS':
-      return { ...state, ...{ edit: payload } };
+      return { ...state, ...{ edit: payload.edit } };
 
     default:
       return state;

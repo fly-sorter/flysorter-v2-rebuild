@@ -26,6 +26,7 @@ class EditPart extends React.Component {
   // }
 
   editOnClick = () => {
+    
     this.props.editParts(true)
     // this.setState(function () {
     //   return{
