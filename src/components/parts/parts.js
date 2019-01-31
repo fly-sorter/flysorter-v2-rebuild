@@ -7,9 +7,7 @@ import * as actions from '../../store/actions/parts-actions.js';
 import EditPart from '../edit-part/edit-part.js';
 import Save from '../save/save.js';
 import Delete from '../delete/delete.js'
-
 import './parts.css';
-
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -26,23 +24,21 @@ class Parts extends React.Component {
     this.props.getParts();
   }
 
-  renderEditable = (cellInfo) => {
-    console.log('in render editable', this.props.parts.parts[0].part_desc)
+  renderEditable = (rowInfo) => {
+    console.log(rowInfo.original.part_desc, 'rowInfo')
     if (this.props.edit.edit === true) {
       return (
-        <div
-          style={{ backgroundColor: "#fafafa" }}
-          contentEditable
-          suppressContentEditableWarning
-          onBlur={e => {
-            const data = [...this.props.parts.parts];
-            data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-            this.setState({ data });
+        <div 
+        contentEditable
+        suppressContentEditableWarning
+        onBlur={e => {
+            const data = this.props.parts.parts.map(el => {return el});
+            data[rowInfo.index][rowInfo.column.id] = e.target.innerHTML;
           }}
-        />
+        >{rowInfo.original.part_desc}</div>
       );
     }
-    return <p>{this.props.parts.parts[0].part_desc}</p>;
+    return <div>{rowInfo.original.part_desc}</div>;
   }
 
   render() {
@@ -94,19 +90,23 @@ class Parts extends React.Component {
                   Header: 'Assembly',
                   accessor: 'part_sub',
                   width: 100,
+                  Cell: this.renderEditable,
                 },
                 {
                   Header: 'Source',
                   accessor: 'part_src',
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Mfg/Dist Part #',
                   accessor: 'part_mfgnum',
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Price',
                   accessor: 'part_price',
                   width: 90,
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Category ID',
@@ -122,14 +122,17 @@ class Parts extends React.Component {
                   Header: 'Qty In Stock',
                   accessor: 'part_count',
                   width: 100,
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Lead time (W)',
                   accessor: 'part_longlead',
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Notes',
                   accessor: 'part_notes',
+                  Cell: this.renderEditable
                 },
               ],
             },
@@ -141,16 +144,19 @@ class Parts extends React.Component {
                   Header: 'Edit',
                   accessor: 'edit',
                   width: 50,
+                  filterable: false,
                 },
                 {
                   Header: 'Save',
                   accessor: 'save',
                   width: 50,
+                  filterable: false,
                 },
                 {
                   Header: 'Delete',
                   accessor: 'delete',
                   width: 70,
+                  filterable: false,
                 },
               ],
             },
