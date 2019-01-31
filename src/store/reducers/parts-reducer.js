@@ -22,6 +22,12 @@ export default (state = initialState, action) => {
     case 'GETPARTS':
       return { ...state, ...{ parts: payload } };
 
+      // case 'EDITPARTS':
+      // return initialState;
+
+    case 'SAVEPARTS':
+      return state ;
+
     default:
       return state;
   }

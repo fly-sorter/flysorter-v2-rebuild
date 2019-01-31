@@ -6,7 +6,13 @@ import * as actions from '../../store/actions/edit-actions.js';
 class Save extends React.Component {
 
   saveOnClick = () => {
-    this.props.saveParts(false)
+    let updateParts = {
+      parts: this.props.parts.parts,
+      edit: false,
+    }
+    // console.log('updateParts', updateParts.parts);
+    this.props.saveParts(updateParts);
+
   }
 
   render() {
@@ -20,6 +26,7 @@ class Save extends React.Component {
 
 const mapStateToProps = state => ({
   edit: state.editable,
+  parts: state.parts,
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({

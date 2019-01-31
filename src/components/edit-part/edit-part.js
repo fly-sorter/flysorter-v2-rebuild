@@ -7,31 +7,10 @@ import './edit-part.css';
 class EditPart extends React.Component {
   constructor(props) {
     super(props);
-    // this.renderEditable = this.renderEditable.bind(this);
   }
-
-  // renderEditable = (cellInfo) => {
-  //   return (
-  //     <div
-  //       style={{ backgroundColor: '#fafafa' }}
-  //       contentEditable
-  //       suppressContentEditableWarning
-  //       onBlur={e => {
-  //         const data = this.props.parts.parts;
-  //         data[cellInfo.index][cellInfo.column.part_desc] = e.target.innerHTML;
-  //         this.setState({ data });
-  //       }}
-  //     />
-  //   );
-  // }
 
   editOnClick = () => {
     this.props.editParts(true)
-    // this.setState(function () {
-    //   return{
-    //     editable: console.log('itworks')
-    //   }
-    // })
   }
 
   render() {

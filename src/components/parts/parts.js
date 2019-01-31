@@ -1,71 +1,76 @@
 import React from 'react';
-import { render } from 'react-dom';
 // import { makeData } from './utils';
-import matchSorter from 'match-sorter';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/parts-actions.js';
 import EditPart from '../edit-part/edit-part.js';
 import Save from '../save/save.js';
 import Delete from '../delete/delete.js'
-
 import './parts.css';
-
-// Import React Table
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-
-
 
 class Parts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       filtered: [],
+      selected: null,
     }
-    // this.editOnClick = this.editOnClick.bind(this);
   };
-
 
   componentDidMount = () => {
     this.props.getParts();
   }
 
-  // function renderEditable(cellInfo) {
-  //   console.log('test')
-  //   return (
-  //     <div
-  //       style={{ backgroundColor: "#fafafa" }}
-  //       contentEditable
-  //       suppressContentEditableWarning
-  //       onBlur={e => {
-  //         const data = this.props.parts.parts;
-  //         data[cellInfo.index][cellInfo.column.part_desc] = e.target.innerHTML;
-  //         this.setState({ data });
-  //       }}
-  //     />
-  //   );
-  // }
+  renderEditable = (rowInfo) => {
+    // console.log(rowInfo.original.part_desc, 'rowInfo')
+    if (this.props.edit.edit === true) {
+      return (
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          onBlur={e => {
+            const data = this.props.parts.parts.map(el => { return el });
+            data[rowInfo.index][rowInfo.column.id] = e.target.innerHTML;
 
-  // editOnClick = () => {
-  //   this.setState({
-  //     editable: true,
-  //   })
-  // }
+          }}
+        >{rowInfo.original.part_desc}</div>
+      );
+    }
+    return <div>{rowInfo.original.part_desc}</div>;
+  }
 
   render() {
+
     const data = this.props.parts.parts.map(element => {
       element.edit = <EditPart />
       element.save = <Save />
       element.delete = <Delete />
       return element;
     });
-    console.log(this.props.editable)
-    // const columns = this.props.parts.parts;
+
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
+          /* getTrProps={(state, rowInfo) => {
+            if (rowInfo && rowInfo.row) {
+              return {
+                onClick: (e) => {
+                  this.setState({
+                    selected: rowInfo.index
+                  })
+                },
+                style: {
+                  background: rowInfo.index === this.state.selected ? 'lightgreen' : 'white',
+                },
+              }
+            } else {
+              return {}
+            }
+          }} */
+
           columns={[
             {
               Header: 'Parts',
@@ -79,7 +84,7 @@ class Parts extends React.Component {
                 {
                   Header: 'Description',
                   accessor: 'part_desc',
-                  Cell: this.state.editable,
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Assembly',
@@ -89,6 +94,7 @@ class Parts extends React.Component {
                 {
                   Header: 'Source',
                   accessor: 'part_src',
+
                 },
                 {
                   Header: 'Mfg/Dist Part #',
@@ -132,16 +138,19 @@ class Parts extends React.Component {
                   Header: 'Edit',
                   accessor: 'edit',
                   width: 50,
+                  filterable: false,
                 },
                 {
                   Header: 'Save',
                   accessor: 'save',
                   width: 50,
+                  filterable: false,
                 },
                 {
                   Header: 'Delete',
                   accessor: 'delete',
                   width: 70,
+                  filterable: false,
                 },
               ],
             },
@@ -234,16 +243,19 @@ class Parts extends React.Component {
                           Header: 'Edit',
                           accessor: 'edit',
                           width: 50,
+                          filterable: false,
                         },
                         {
                           Header: 'Save',
                           accessor: 'save',
                           width: 50,
+                          filterable: false,
                         },
                         {
                           Header: 'Delete',
                           accessor: 'delete',
                           width: 70,
+                          filterable: false,
                         },
                       ],
                     },
@@ -269,10 +281,9 @@ class Parts extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   parts: state.parts,
-  edit: state.editable,
+  edit: state.edit,
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
