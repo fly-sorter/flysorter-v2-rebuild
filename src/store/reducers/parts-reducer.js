@@ -26,8 +26,8 @@ export default (state = initialState, action) => {
     //   return initialState;
 
     case 'SAVEPARTS':
-      console.log({...state}, '1st saveParts');
-      console.log(payload.parts, '2nd payloadParts');
+      // console.log({...state}, '1st saveParts');
+      // console.log(payload.parts, '2nd payloadParts');
       return state ;
 
     default:

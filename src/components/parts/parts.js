@@ -10,7 +10,6 @@ import Delete from '../delete/delete.js'
 
 import './parts.css';
 
-// Import React Table
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -23,13 +22,12 @@ class Parts extends React.Component {
     }
   };
 
-
   componentDidMount = () => {
     this.props.getParts();
   }
 
   renderEditable = (cellInfo) => {
-    console.log('in render editable')
+    console.log('in render editable', this.props.parts.parts[0].part_desc)
     if (this.props.edit.edit === true) {
       return (
         <div
@@ -44,6 +42,7 @@ class Parts extends React.Component {
         />
       );
     }
+    return <p>{this.props.parts.parts[0].part_desc}</p>;
   }
 
   render() {
@@ -54,13 +53,11 @@ class Parts extends React.Component {
       return element;
     });
 
-    // console.log(this.props.edit.edit, 'editable')
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
-
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
@@ -71,7 +68,7 @@ class Parts extends React.Component {
                 },
                 style: {
                   background: rowInfo.index === this.state.selected ? 'lightgreen' : 'white',
-                }
+                },
               }
             } else {
               return {}
@@ -91,7 +88,7 @@ class Parts extends React.Component {
                 {
                   Header: 'Description',
                   accessor: 'part_desc',
-                  Cell: this.renderEditable,
+                  Cell: this.renderEditable
                 },
                 {
                   Header: 'Assembly',
