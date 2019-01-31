@@ -32,7 +32,7 @@ class Parts extends React.Component {
           onBlur={e => {
             const data = this.props.parts.parts.map(el => { return el });
             data[rowInfo.index][rowInfo.column.id] = e.target.innerHTML;
-            
+
           }}
         >{rowInfo.original.part_desc}</div>
       );
@@ -41,6 +41,7 @@ class Parts extends React.Component {
   }
 
   render() {
+
     const data = this.props.parts.parts.map(element => {
       element.edit = <EditPart />
       element.save = <Save />
@@ -53,7 +54,7 @@ class Parts extends React.Component {
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
-          getTrProps={(state, rowInfo) => {
+          /* getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
                 onClick: (e) => {
@@ -68,7 +69,8 @@ class Parts extends React.Component {
             } else {
               return {}
             }
-          }}
+          }} */
+
           columns={[
             {
               Header: 'Parts',
@@ -88,7 +90,6 @@ class Parts extends React.Component {
                   Header: 'Assembly',
                   accessor: 'part_sub',
                   width: 100,
-
                 },
                 {
                   Header: 'Source',
