@@ -6,14 +6,13 @@ import * as actions from '../../store/actions/edit-actions.js';
 class Save extends React.Component {
 
   saveOnClick = () => {
-    // console.log('in the saveOnClij')
     let updateParts = {
       parts: this.props.parts.parts,
       edit: false,
     }
-    console.log('updateParts', updateParts.parts);
+    // console.log('updateParts', updateParts.parts);
     this.props.saveParts(updateParts);
-    
+
   }
 
   render() {
