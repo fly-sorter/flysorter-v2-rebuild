@@ -48,19 +48,20 @@ class Parts extends React.Component {
       element.delete = <Delete />
       return element;
     });
-
+    
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
-          /* getTrProps={(state, rowInfo) => {
+          getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
-                onClick: (e) => {
+                onFocus: (e) => {
                   this.setState({
                     selected: rowInfo.index
                   })
+                  console.log(rowInfo.row)
                 },
                 style: {
                   background: rowInfo.index === this.state.selected ? 'lightgreen' : 'white',
@@ -69,7 +70,7 @@ class Parts extends React.Component {
             } else {
               return {}
             }
-          }} */
+          }}
 
           columns={[
             {
@@ -94,7 +95,6 @@ class Parts extends React.Component {
                 {
                   Header: 'Source',
                   accessor: 'part_src',
-
                 },
                 {
                   Header: 'Mfg/Dist Part #',
