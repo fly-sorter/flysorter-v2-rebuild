@@ -21,7 +21,7 @@ class EditPart extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  edit: state.editable
+  edit: state.edit
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
