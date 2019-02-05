@@ -23,6 +23,7 @@ class Parts extends React.Component {
   }
 
   renderEditable = (rowInfo) => {
+
     if (this.props.edit.edit === true) {
       return (
         <div
@@ -30,13 +31,13 @@ class Parts extends React.Component {
           suppressContentEditableWarning
           onBlur={e => {
             const data = [...this.props.parts.parts];
-            data[rowInfo.index][rowInfo.value] = e.target.innerHTML;
-            {/* console.log(rowInfo.row._original, 'the info to update') */}
+            data[rowInfo.index][rowInfo.column.id] = e.target.innerHTML;
           }}
-        >{rowInfo.original.part_desc}</div>
+        >{rowInfo.row._original.part_desc}</div>
       );
     }
-    return <div>{rowInfo.original.part_desc}</div>;
+    // console.log(rowInfo.row._original, 'the info to update')
+    return <div>{rowInfo.row._original.part_desc}</div>
   }
 
   render() {
@@ -57,105 +58,103 @@ class Parts extends React.Component {
             })
           },
           style: {
-            background: rowInfo.index === this.state.selected ? 'lightgreen' : 'white',
+            background: (rowInfo.index === this.state.selected && this.props.edit.edit === true) ? 'lightgreen' : 'white',
           },
         }
       } else {
         return {}
       }
     }}
-
-    const columns = [
-      {
-        Header: 'Parts',
-
-        columns: [
-          {
-            Header: 'ID',
-            accessor: 'part_id',
-            width: 90,
-          },
-          {
-            Header: 'Description',
-            accessor: 'part_desc',
-            Cell: this.renderEditable
-          },
-          {
-            Header: 'Assembly',
-            accessor: 'part_sub',
-            width: 100,
-          },
-          {
-            Header: 'Source',
-            accessor: 'part_src',
-          },
-          {
-            Header: 'Mfg/Dist Part #',
-            accessor: 'part_mfgnum',
-          },
-          {
-            Header: 'Price',
-            accessor: 'part_price',
-            width: 90,
-          },
-          {
-            Header: 'Category ID',
-            accessor: 'part_category',
-            width: 100,
-          },
-          {
-            Header: 'Location ID',
-            accessor: 'part_location',
-            width: 100,
-          },
-          {
-            Header: 'Qty In Stock',
-            accessor: 'part_count',
-            width: 100,
-          },
-          {
-            Header: 'Lead time (W)',
-            accessor: 'part_longlead',
-          },
-          {
-            Header: 'Notes',
-            accessor: 'part_notes',
-          },
-        ],
-      },
-      {
-        Header: 'Actions',
-
-        columns: [
-          {
-            Header: 'Edit',
-            accessor: 'edit',
-            width: 50,
-            filterable: false,
-          },
-          {
-            Header: 'Save',
-            accessor: 'save',
-            width: 50,
-            filterable: false,
-          },
-          {
-            Header: 'Delete',
-            accessor: 'delete',
-            width: 70,
-            filterable: false,
-          },
-        ],
-      },
-    ]
-    
+ 
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
           {...backgroundProps}
-          columns={columns}
+          columns = {[
+            {
+              Header: 'Parts',
+
+              columns: [
+                {
+                  Header: 'ID',
+                  accessor: 'part_id',
+                  width: 90,
+                },
+                {
+                  Header: 'Description',
+                  accessor: 'part_desc',
+                  Cell: this.renderEditable
+                },
+                {
+                  Header: 'Assembly',
+                  accessor: 'part_sub',
+                  width: 100,
+                },
+                {
+                  Header: 'Source',
+                  accessor: 'part_src',
+                },
+                {
+                  Header: 'Mfg/Dist Part #',
+                  accessor: 'part_mfgnum',
+                },
+                {
+                  Header: 'Price',
+                  accessor: 'part_price',
+                  width: 90,
+                },
+                {
+                  Header: 'Category ID',
+                  accessor: 'part_category',
+                  width: 100,
+                },
+                {
+                  Header: 'Location ID',
+                  accessor: 'part_location',
+                  width: 100,
+                },
+                {
+                  Header: 'Qty In Stock',
+                  accessor: 'part_count',
+                  width: 100,
+                },
+                {
+                  Header: 'Lead time (W)',
+                  accessor: 'part_longlead',
+                },
+                {
+                  Header: 'Notes',
+                  accessor: 'part_notes',
+                },
+              ],
+            },
+            {
+              Header: 'Actions',
+
+              columns: [
+                {
+                  Header: 'Edit',
+                  accessor: 'edit',
+                  width: 50,
+                  filterable: false,
+                },
+                {
+                  Header: 'Save',
+                  accessor: 'save',
+                  width: 50,
+                  filterable: false,
+                },
+                {
+                  Header: 'Delete',
+                  accessor: 'delete',
+                  width: 70,
+                  filterable: false,
+                },
+              ],
+            },
+          ]}
           data={data}
           defaultPageSize={25}
           filtered={this.state.filtered}
@@ -179,7 +178,89 @@ class Parts extends React.Component {
                 <br />
                 <ReactTable
                   className='-striped -highlight parts-table'
-                  columns={columns}
+                  columns = {[
+                    {
+                      Header: 'Parts',
+
+                      columns: [
+                        {
+                          Header: 'ID',
+                          accessor: 'part_id',
+                          width: 90,
+                        },
+                        {
+                          Header: 'Description',
+                          accessor: 'part_desc',
+                          Cell: this.renderEditable
+                        },
+                        {
+                          Header: 'Assembly',
+                          accessor: 'part_sub',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Source',
+                          accessor: 'part_src',
+                        },
+                        {
+                          Header: 'Mfg/Dist Part #',
+                          accessor: 'part_mfgnum',
+                        },
+                        {
+                          Header: 'Price',
+                          accessor: 'part_price',
+                          width: 90,
+                        },
+                        {
+                          Header: 'Category ID',
+                          accessor: 'part_category',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Location ID',
+                          accessor: 'part_location',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Qty In Stock',
+                          accessor: 'part_count',
+                          width: 100,
+                        },
+                        {
+                          Header: 'Lead time (W)',
+                          accessor: 'part_longlead',
+                        },
+                        {
+                          Header: 'Notes',
+                          accessor: 'part_notes',
+                        },
+                      ],
+                    },
+                    {
+                      Header: 'Actions',
+
+                      columns: [
+                        {
+                          Header: 'Edit',
+                          accessor: 'edit',
+                          width: 50,
+                          filterable: false,
+                        },
+                        {
+                          Header: 'Save',
+                          accessor: 'save',
+                          width: 50,
+                          filterable: false,
+                        },
+                        {
+                          Header: 'Delete',
+                          accessor: 'delete',
+                          width: 70,
+                          filterable: false,
+                        },
+                      ],
+                    },
+                  ]}
                   data={data}
                   filterable={false}
                   sorted={[{
