@@ -5,11 +5,13 @@ import thunk from 'redux-thunk';
 import partsReducer from '../store/reducers/parts-reducer.js';
 import editReducer from '../store/reducers/edit-reducer.js';
 import saveReducer from '../store/reducers/save-reducer.js';
+import createPartReducer from '../store/reducers/createPart-reducer.js';
 
 let reducers = combineReducers({
   parts: partsReducer,
   edit: editReducer,
   save: saveReducer,
+  createPart: createPartReducer,
 });
 
 const store = () => 
