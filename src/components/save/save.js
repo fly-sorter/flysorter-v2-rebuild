@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/edit-actions.js';
 
 class Save extends React.Component {
-
+  
   saveOnClick = () => {
+    // console.log(this.props.rowInfo.row._original)
     let updateParts = {
-      parts: this.props.parts.parts,
+      parts: this.props.parts.parts, //updating all parts, only want to update edited part
       edit: false,
+      save: this.props.save
     }
-    // console.log('updateParts', updateParts.parts);
     this.props.saveParts(updateParts);
-
   }
 
   render() {
@@ -25,8 +25,9 @@ class Save extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  edit: state.editable,
+  edit: state.edit,
   parts: state.parts,
+  save: state.save
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({

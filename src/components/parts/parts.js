@@ -23,21 +23,21 @@ class Parts extends React.Component {
   }
 
   renderEditable = (rowInfo) => {
-    // console.log(rowInfo.original.part_desc, 'rowInfo')
+
     if (this.props.edit.edit === true) {
       return (
         <div
           contentEditable
           suppressContentEditableWarning
           onBlur={e => {
-            const data = this.props.parts.parts.map(el => { return el });
+            const data = [...this.props.parts.parts];
             data[rowInfo.index][rowInfo.column.id] = e.target.innerHTML;
-
           }}
-        >{rowInfo.original.part_desc}</div>
+        >{rowInfo.row._original.part_desc}</div>
       );
     }
-    return <div>{rowInfo.original.part_desc}</div>;
+    // console.log(rowInfo.row._original, 'the info to update')
+    return <div>{rowInfo.row._original.part_desc}</div>
   }
 
   render() {
@@ -49,29 +49,30 @@ class Parts extends React.Component {
       return element;
     });
 
+    const backgroundProps = {getTrProps: (state, rowInfo) => {
+      if (rowInfo && rowInfo.row) {
+        return {
+          onFocus: (e) => {
+            this.setState({
+              selected: rowInfo.index
+            })
+          },
+          style: {
+            background: (rowInfo.index === this.state.selected && this.props.edit.edit === true) ? 'lightgreen' : 'white',
+          },
+        }
+      } else {
+        return {}
+      }
+    }}
+ 
     return (
       <div>
         <button onClick={() => this.setState({ filtered: [] })}>Reset Filters</button>
         <ReactTable
           className="-striped -highlight parts-table"
-          /* getTrProps={(state, rowInfo) => {
-            if (rowInfo && rowInfo.row) {
-              return {
-                onClick: (e) => {
-                  this.setState({
-                    selected: rowInfo.index
-                  })
-                },
-                style: {
-                  background: rowInfo.index === this.state.selected ? 'lightgreen' : 'white',
-                },
-              }
-            } else {
-              return {}
-            }
-          }} */
-
-          columns={[
+          {...backgroundProps}
+          columns = {[
             {
               Header: 'Parts',
 
@@ -94,7 +95,6 @@ class Parts extends React.Component {
                 {
                   Header: 'Source',
                   accessor: 'part_src',
-
                 },
                 {
                   Header: 'Mfg/Dist Part #',
@@ -177,8 +177,8 @@ class Parts extends React.Component {
                 <br />
                 <br />
                 <ReactTable
-                  className='parts-table'
-                  columns={[
+                  className='-striped -highlight parts-table'
+                  columns = {[
                     {
                       Header: 'Parts',
 
@@ -191,6 +191,7 @@ class Parts extends React.Component {
                         {
                           Header: 'Description',
                           accessor: 'part_desc',
+                          Cell: this.renderEditable
                         },
                         {
                           Header: 'Assembly',
@@ -262,6 +263,10 @@ class Parts extends React.Component {
                   ]}
                   data={data}
                   filterable={false}
+                  sorted={[{
+                    id: 'part_id',
+                    asc: true,
+                  }]}
                   defaultPageSize={5}
                   showPagination={false}
                   SubComponent={row => {

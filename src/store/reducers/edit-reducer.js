@@ -1,5 +1,5 @@
 
-const initialState = { edit: false };
+const initialState = { edit: false, save: false };
 
 export default (state = initialState, action) => {
   let { type, payload } = action;
@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
       return { ...state, ...{ edit: payload } };
 
     case 'SAVEPARTS':
-      return { ...state, ...{ edit: payload.edit } };
+      return { ...state, ...{ edit: payload.edit, save: payload.save } };
 
     default:
       return state;
