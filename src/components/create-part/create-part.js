@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/createPart-actions.js';
-import { Form, Field } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
+import { Field } from 'react-final-form-html5-validation'
 
 import './create-part.css';
 
@@ -40,7 +41,14 @@ class CreatePart extends React.Component {
                   required
                   valueMissing='No value!'
                   component='input'
-                  class='inputField'>
+                  class='inputField'
+                  >
+                  {/* {({input, meta, placeholder}) => (
+                    <div>
+                      <label>Id</label>
+                        <input {...input} placeholder={placeholder}/>
+                    </div>
+                  )} */}
                   </Field>
                   <Field
                   name='description'
@@ -60,8 +68,12 @@ class CreatePart extends React.Component {
                   component='input'
                   class='inputField'>
                   </Field>
-              <button type='submit' disabled={submitting}>Submit</button>
-              <pre>{JSON.stringify(values, undefined, 2)}</pre>
+              <button className='formButton' type='submit' disabled={submitting}>Submit</button>
+              {/* <pre>{JSON.stringify(values, undefined, 2)}</pre> */}
+              <FormSpy subscription={{ values: true }}>
+            {({ values }) => <pre className='formSpy'>{JSON.stringify(values, undefined, 2)}</pre>}
+          </FormSpy>
+          <br />
             </form>
           )}
         </Form>

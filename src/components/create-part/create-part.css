@@ -18,7 +18,7 @@ form{
   box-shadow:         3px 3px 4px 5px #ccc;
 }
 
-button{
+.formButton{
   width: 20%;
   margin: .5% 40%;
   padding: 12px 20px; 
@@ -30,6 +30,15 @@ button{
 
 .idLabel{
   display: inline-block;
+}
+
+.formSpy{
+  background: grey;
+  width: 80%;
+  margin: 2% 10%;
+  -moz-box-shadow:    3px 3px 4px 5px black;
+  -webkit-box-shadow: 3px 3px 4px 5px black;
+  box-shadow:         3px 3px 4px 5px black;
 }
 
 /* .inputField {
