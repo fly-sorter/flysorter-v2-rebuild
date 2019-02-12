@@ -36,7 +36,7 @@ class Parts extends React.Component {
         >{rowInfo.row._original.part_desc}</div>
       );
     }
-    // console.log(rowInfo.row._original, 'the info to update')
+    console.log(rowInfo.row._original.part_id, 'the info to update')
     return <div>{rowInfo.row._original.part_desc}</div>
   }
 
